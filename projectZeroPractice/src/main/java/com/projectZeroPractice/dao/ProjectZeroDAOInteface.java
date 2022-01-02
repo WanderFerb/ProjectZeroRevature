@@ -18,7 +18,9 @@ public interface ProjectZeroDAOInteface {
 
 	ProjectZeroUser loginProfileDAO(ProjectZeroUser pzu);
 
-	List<TimelineEntity> viewTimelineDAO(ProjectZeroUser pzu);
+	List<TimelineEntity> viewTimelineDAO();
+
+	List<TimelineEntity> addTimelineDAO();
 
 	
 

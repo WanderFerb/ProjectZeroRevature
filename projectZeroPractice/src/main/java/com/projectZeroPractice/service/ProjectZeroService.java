@@ -39,11 +39,18 @@ public class ProjectZeroService implements ProjectZeroServiceInterface {
 	}
 
 	@Override
-	public List<TimelineEntity> timelineService(ProjectZeroUser pzu) {
+	public List<TimelineEntity> timelineShowService(ProjectZeroUser pzu) {
 		ProjectZeroDAOInteface pzdi= DAOFactory.createObject();
-		return pzdi.viewTimelineDAO(pzu);
+		return pzdi.viewTimelineDAO();
 	}
 
+	@Override
+	public List<TimelineEntity> timelineAddService(ProjectZeroUser pzu) {
+		ProjectZeroDAOInteface pzdi= DAOFactory.createObject();
+		return pzdi.addTimelineDAO();
+	}
+
+	
 	
 
 }

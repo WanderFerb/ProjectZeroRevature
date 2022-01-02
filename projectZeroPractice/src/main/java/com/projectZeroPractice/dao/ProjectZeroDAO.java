@@ -137,32 +137,56 @@ public class ProjectZeroDAO implements ProjectZeroDAOInteface {
 	}
 
 	@Override
-	public List<TimelineEntity> viewTimelineDAO(ProjectZeroUser pzu) {
+	public List<TimelineEntity> viewTimelineDAO() {
 		List<TimelineEntity> pzl1 = new ArrayList<TimelineEntity>();
-
-		try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			Connection con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "system", "Abhinav");
-			PreparedStatement ps = con.prepareStatement("select * from timeline where reciever=?");
-
-			ps.setString(1, pzu.getEmail());
-			
-			ResultSet res = ps.executeQuery();
-
-			while (res.next()) {
-				TimelineEntity tme = new TimelineEntity();
-				tme.setSender(res.getString(1));
-				tme.setTimeOfMessage(res.getString(2));
-				tme.setMessage(res.getString(3));
-				tme.setReciever(res.getString(4));
+	
+			try {
+				Class.forName("oracle.jdbc.driver.OracleDriver");
+				Connection con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "system", "Abhinav");
+				PreparedStatement ps = con.prepareStatement("select * from timeline");
+	
+				ResultSet res = ps.executeQuery();
+	
+				while (res.next()) {
+					TimelineEntity tme = new TimelineEntity();
+					tme.setSender(res.getString(1));
+					tme.setTimeOfMessage(res.getString(2));
+					tme.setMessage(res.getString(3));
+					tme.setReciever(res.getString(4));
+				
 
 				pzl1.add(tme);
 			}
+			
 
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}
 		return pzl1;
+	}
+
+	@Override
+	public List<TimelineEntity> addTimelineDAO() {
+		List<TimelineEntity> pzl2 = new ArrayList<TimelineEntity>();
+
+		int i = 0;
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			Connection con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "system", "Abhinav");
+			PreparedStatement ps = con.prepareStatement("insert into timeline values(?,?,?,?)");
+
+			TimelineEntity tme = new TimelineEntity();
+			ps.setNString(1, tme.getSender());
+			ps.setNString(2, tme.getTimeOfMessage());
+			ps.setNString(3, tme.getMessage());
+			ps.setNString(4, tme.getReciever());
+			
+			i = ps.executeUpdate();
+
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}
+		return pzl2;
 	}
 
 }

@@ -42,7 +42,7 @@ public class MainView {
 				int i2 = pzci.loginProfileController();
 						
 				if (i2>0) {
-					System.out.println("Profile Logged In Successfully");
+					System.out.println("Logged into Profile");
 					
 				}
 				else {

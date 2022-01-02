@@ -17,6 +17,8 @@ public interface ProjectZeroServiceInterface {
 
 	ProjectZeroUser loginProfileService(ProjectZeroUser pzu);
 
-	List<TimelineEntity> timelineService(ProjectZeroUser pzu);
+	List<TimelineEntity> timelineShowService(ProjectZeroUser pzu);
+
+	List<TimelineEntity> timelineAddService(ProjectZeroUser pzu);
 
 }
